@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"runtime"
 
 	"github.com/JihoonPark93/JHCoin/explorer"
 	"github.com/JihoonPark93/JHCoin/rest"
@@ -14,7 +15,7 @@ func usage() {
 	fmt.Printf("Please use the following command :\n\n")
 	fmt.Printf("-port:	Set the PORT of the server\n")
 	fmt.Printf("-mode:	Choose between 'html' and 'rest'\n")
-	os.Exit(0)
+	runtime.Goexit()
 }
 
 func Start() {
@@ -30,9 +31,9 @@ func Start() {
 	fmt.Println(*port, *mode)
 	switch *mode {
 	case "html":
-		rest.Start(*port)
-	case "rest":
 		explorer.Start(*port)
+	case "rest":
+		rest.Start(*port)
 	default:
 		usage()
 	}
