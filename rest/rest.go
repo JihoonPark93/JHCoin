@@ -7,7 +7,6 @@ import (
 	"net/http"
 
 	"github.com/JihoonPark93/JHCoin/blockchain"
-	"github.com/JihoonPark93/JHCoin/utils"
 	"github.com/gorilla/mux"
 )
 
@@ -27,9 +26,6 @@ type urlDescription struct {
 	Payload     string `json:"payload,omitempty"`
 }
 
-type addBlockBody struct {
-	Message string
-}
 type errorResponse struct {
 	ErrorMessage string `json:"errorMessage"`
 }
@@ -74,9 +70,7 @@ func blocks(rw http.ResponseWriter, r *http.Request) {
 	case "GET":
 		json.NewEncoder(rw).Encode(blockchain.Blockchain().Blocks())
 	case "POST":
-		var addBlockBody addBlockBody
-		utils.HandleError(json.NewDecoder(r.Body).Decode(&addBlockBody))
-		blockchain.Blockchain().AddBlock(addBlockBody.Message)
+		blockchain.Blockchain().AddBlock()
 		rw.WriteHeader(http.StatusCreated)
 	}
 }
