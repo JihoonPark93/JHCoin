@@ -5,11 +5,13 @@ http://localhost:4000/status
 
 ###
 http://localhost:4000/blocks
-###
+### 
 POST http://localhost:4000/blocks
 
 {
     "message": "Mine me"
 }
 ###
-http://localhost:4000/blocks/ 
+http://localhost:4000/balance/jh
+###
+http://localhost:4000/balance/jh?total=true
